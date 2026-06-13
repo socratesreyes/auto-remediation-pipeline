@@ -14,3 +14,7 @@ UBUNTU SERVER [Node Exporter] --(metrics)--> [Prometheus] --(alert)--> [Alertman
  
 Node Exporter       /usr/local/bin/node_exporter/etc/systemd/system/node_exporter.service                                     Exposes system metrics on port 9100
 Prometheus          /opt/prometheus/prometheus.yml/opt/prometheus/rules/cpu_alert.yml/etc/systemd/system/prometheus.service   Scrapes metrics, evaluates alert rules
+Alertmanager        /etc/alertmanager/alertmanager.yml/etc/systemd/system/alertmanager.service                             Receives alerts, sends webhook to Jenkins
+Jenkins             /var/lib/jenkins/ (home)/etc/default/jenkinsJob: Kill-CPU-Load (configured via UI)                   Runs remediation script on webhook trigger 
+Remediation Script  /home/soc/.local/bin/yes_watcher.sh                                                                  Kills all yes processes owned by soc
+Sudoers Entry       /etc/sudoers.d/jenkins-pkill                                                                          Allows jenkins user to run script as soc without password
