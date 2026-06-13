@@ -1,0 +1,9 @@
+# Secrets / credentials (if any)
+*.secret
+*.token
+*.key
+# Binary files
+*.tar.gz
+*.zip
+# Jenkins home (if accidentally copied)
+jenkins/

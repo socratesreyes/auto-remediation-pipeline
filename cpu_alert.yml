@@ -1,0 +1,12 @@
+groups:
+  - name: cpu_alerts
+    interval: 30s
+    rules:
+      - alert: HighCPULoad
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 40
+        for: 15s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU load on {{ $labels.instance }}"
+          description: "CPU load > 40% for 15 seconds. Current value: {{ $value }}%"
