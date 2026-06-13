@@ -17,4 +17,4 @@ Prometheus          /opt/prometheus/prometheus.yml/opt/prometheus/rules/cpu_aler
 Alertmanager        /etc/alertmanager/alertmanager.yml/etc/systemd/system/alertmanager.service                             Receives alerts, sends webhook to Jenkins
 Jenkins             /var/lib/jenkins/ (home)/etc/default/jenkinsJob: Kill-CPU-Load (configured via UI)                   Runs remediation script on webhook trigger 
 Remediation Script  /home/soc/.local/bin/yes_watcher.sh                                                                  Kills all yes processes owned by soc
-Sudoers Entry       /etc/sudoers.d/jenkins-pkill                                                                          Allows jenkins user to run script as soc without password
+Sudoers Entry       /etc/sudoers.d/jenkins-pkill                                                          Allows jenkins user to run script as soc without password
