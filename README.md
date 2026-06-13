@@ -1,4 +1,16 @@
 nano README.md
-# Paste the content I provided, save.
 
-test
+
+Overview
+This project monitors CPU usage on a Linux system (Ubuntu/WSL2). When CPU exceeds 60% for 15 seconds, Prometheus triggers an alert. Alertmanager sends an authenticated webhook to Jenkins, which runs a script that kills the offending yes process. The entire loop is visible in Grafana dashboards.
+
+Architecture Diagram
+UBUNTU SERVER [Node Exporter] --(metrics)--> [Prometheus] --(alert)--> [Alertmanager]  --(webhook)--> [Jenkins] --(executes)--> [yes_watcher.sh] --(kills)--> [yes process]                                                                    ^
+                                                                            +-- uses API token for authentication
+
+ 
+ File Locations (on Ubuntu/WSL2)   
+
+ 
+Node Exporter       /usr/local/bin/node_exporter/etc/systemd/system/node_exporter.service                                     Exposes system metrics on port 9100
+Prometheus          /opt/prometheus/prometheus.yml/opt/prometheus/rules/cpu_alert.yml/etc/systemd/system/prometheus.service   Scrapes metrics, evaluates alert rules
