@@ -137,3 +137,17 @@ Alert never becomes FIRING            	    CPU not high enough, or rule interval
 Alertmanager log shows 403	                CSRF token missing or invalid	                      Use Basic Auth header with API token 
 Jenkins build triggered but yes not killed	Jenkins user lacks permission                      	Verify sudoers entry and script ownership
 Grafana no data                            	Data source not pointing to Prometheus	            Set URL http://localhost:9090 in Grafana datasource / 
+
+
+Credits & Environment
+OS: Ubuntu 24.04 LTS (WSL2 on Windows 10/11)
+
+Tools: Prometheus 3.2.1, Node Exporter 1.9.0, Grafana 11.x, Jenkins 2.462, Alertmanager 0.28.0
+
+Author:Socrates Reyes
+
+Date: June 2026
+
+
+
+
