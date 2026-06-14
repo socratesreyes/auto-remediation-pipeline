@@ -73,3 +73,12 @@ receivers:
 
 
 4. Jenkins Job Kill-CPU-Load
+
+Build Trigger: Remote API – token CPU123
+
+Build Step: Execute shell
+
+bash
+sudo -u soc /home/soc/.local/bin/yes_watcher.sh
+
+
