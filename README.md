@@ -104,5 +104,8 @@ jenkins ALL=(soc) NOPASSWD: /home/soc/.local/bin/yes_watcher.sh
 
 
 
-
+FLOW STEP BY STEP
+STEP           COMPONENT      ACTION              HOW TO CHECK
+1              USER           RUN SCRIPT          ps aux | grep yes or grafana dashboard
+                              yes > /dev/null &
 
