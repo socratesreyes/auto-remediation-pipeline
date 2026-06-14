@@ -86,8 +86,11 @@ sudo -u soc /home/soc/.local/bin/yes_watcher.sh
 5. Remediation Script (/home/soc/.local/bin/yes_watcher.sh)
 
 bash
-#!/bin/bash
+# 1. Deletes the signal file 
 rm -f /tmp/kill_yes.signal
+# 2. Kills the target 'yes' processes 
 /usr/bin/pkill -u soc -f ^yes$
+# 3. Prints the completion message to your Jenkins console
 echo "Remediation complete: 'yes' processes terminated."
+
 
