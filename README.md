@@ -105,7 +105,23 @@ jenkins ALL=(soc) NOPASSWD: /home/soc/.local/bin/yes_watcher.sh
 
 
 FLOW STEP BY STEP
-STEP           COMPONENT      ACTION              HOW TO CHECK
-1              USER           RUN SCRIPT          ps aux | grep yes or grafana dashboard
-                              yes > /dev/null &
+STEP           COMPONENT          ACTION                      HOW TO CHECK
+1              USER               RUN SCRIPT                  ps aux | grep yes or Grafana UI dashboard
+                                  yes > /dev/null &
+2              Node Exporter      reports CPU usage           Prometheus UI: /targets – node_exporter state UP (normal)
+                                  to Prometheus every 15s
+3              Prometheus         Evaluates rule every 30s;   Prometheus UI: /alerts 
+                                  if CPU >60% for 15s,
+                                  sets alert to FIRING 
+4              Alertmanager       Recieves firing alert        sudo journalctl -u alertmanager -f
+                                  sends HTTP POST to
+                                  JENKINS WEBHOOK URL
 
+5              JENKINS            Authenticats via API token    JENKINS UI : job build history
+                                  triggers build (Kill-CPU-Load)
+                                  
+6               Jenkins JOB       Runs yes_watcher.sh as user    Jenkins UI console build
+
+7               Prometheus        CPU drops, alert resolves to OK   Prometheus UI:/ alert 
+
+8               Grafana            Dashboard CPU spike recovery     Grafana node exporter FUll dashboard
