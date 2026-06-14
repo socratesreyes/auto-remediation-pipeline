@@ -94,3 +94,15 @@ rm -f /tmp/kill_yes.signal
 echo "Remediation complete: 'yes' processes terminated."
 
 
+
+6. Sudoers Entry (/etc/sudoers.d/jenkins-pkill)
+
+ text
+jenkins ALL=(soc) NOPASSWD: /home/soc/.local/bin/yes_watcher.sh
+
+
+
+
+
+
+
