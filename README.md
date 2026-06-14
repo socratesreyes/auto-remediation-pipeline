@@ -35,5 +35,23 @@ alerting:
 rule_files:
   - "/opt/prometheus/rules/cpu_alert.yml"
 
-   
+
+
+Alert Rule (/opt/prometheus/rules/cpu_alert.yml)
+
+groups:
+  - name: cpu_alerts
+    interval: 30s
+    rules:
+      - alert: HighCPULoad
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 60
+        for: 15s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU load on {{ $labels.instance }}"
+          description: "CPU load > 60% for 15 seconds. Current value: {{ $value }}%"
+
+
+3. Alertmanager (/etc/alertmanager/alertmanager.yml)
 
