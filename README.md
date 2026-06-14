@@ -82,3 +82,12 @@ bash
 sudo -u soc /home/soc/.local/bin/yes_watcher.sh
 
 
+
+5. Remediation Script (/home/soc/.local/bin/yes_watcher.sh)
+
+bash
+#!/bin/bash
+rm -f /tmp/kill_yes.signal
+/usr/bin/pkill -u soc -f ^yes$
+echo "Remediation complete: 'yes' processes terminated."
+
