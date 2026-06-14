@@ -125,3 +125,15 @@ STEP           COMPONENT          ACTION                      HOW TO CHECK
 7               Prometheus        CPU drops, alert resolves to OK   Prometheus UI:/ alert 
 
 8               Grafana            Dashboard CPU spike recovery     Grafana node exporter FUll dashboard
+
+
+
+
+TROUBLESHOOTING CHEATSHEET
+
+Symptom                                     Likely cause	                                         Fix
+Node Exporter target DOWN                   Node Exporter not running                           sudo systemctl restart node_exporter
+Alert never becomes FIRING            	    CPU not high enough, or rule interval too long	    Lower threshold to 50%, reduce for: to 5s
+Alertmanager log shows 403	                CSRF token missing or invalid	                      Use Basic Auth header with API token 
+Jenkins build triggered but yes not killed	Jenkins user lacks permission                      	Verify sudoers entry and script ownership
+Grafana no data                            	Data source not pointing to Prometheus	            Set URL http://localhost:9090 in Grafana datasource / 
