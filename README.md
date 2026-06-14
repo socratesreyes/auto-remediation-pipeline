@@ -54,4 +54,22 @@ groups:
 
 
 3. Alertmanager (/etc/alertmanager/alertmanager.yml)
+route:
+  receiver: 'jenkins'
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
 
+receivers:
+- name: 'jenkins'
+  webhook_configs:
+  - url: 'http://localhost:8080/job/Kill-CPU-Load/build?token=CPU123'
+    send_resolved: true
+    http_config:
+      basic_auth:
+        username: '###'
+        password: "###"
+
+
+4. Jenkins Job Kill-CPU-Load
